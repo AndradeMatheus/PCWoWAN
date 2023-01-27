@@ -1,4 +1,4 @@
-[# PC Wake on WaN
+# PC Wake on WaN
 
 The goal of this project is to enable the possibility to turn ON/OFF and monitor your PC power state over the internet (IoT), using a simple ESP8266 enabled device for cheap.
 
