@@ -4,7 +4,7 @@
 #include <NTPClient.h>
 #include <WiFiUdp.h>
 #include "connectivity-utils.h"
-#include "front-panel-utils.h"
+#include "frontpanel-utils.h"
 
 //Set-time to update
 const int UPDATE_POWER_STATE = 15; // Change to how many seconds you want it to push to the MQTT topic
