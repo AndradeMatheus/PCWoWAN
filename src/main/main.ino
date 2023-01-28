@@ -6,7 +6,7 @@
 
 //Front panel
 const int BUTTON_PIN = 4;
-const int LED_PIN = 0;
+const int LED_PIN = A0;
 
 //Wi-Fi
 WiFiClient espClient;
@@ -24,7 +24,6 @@ void setup()
 {
   Serial.begin(115200);
   pinMode(BUTTON_PIN, OUTPUT);
-  pinMode(LED_PIN, INPUT);
 
 	while (WiFi.begin(NET_SSID, NET_PASS) != WL_CONNECTED) {
     Serial.println("Connecting to WiFi...");
@@ -68,9 +67,10 @@ void pushButton(int delayAmmount){
 }
 
 bool getPowerState(){
- 	bool power = (bool)digitalRead(LED_PIN);
-	Serial.println("!!! Power is " + String(power ? "ON" : "OFF"));
-  return power;
+ 	float power = analogRead(LED_PIN);
+  Serial.println("POWER VALUE: " + String(power));
+	Serial.println("!!! Power is " + String(power > 100 ? "ON" : "OFF"));
+  return power > 100 ? true : false;
 }
 
 bool updateTopic(const char *topic, const char *content){
