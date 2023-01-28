@@ -29,4 +29,12 @@ void getMessage(char* topic, byte* payload, unsigned int length) {
   Serial.print(p);
   Serial.print(" - FROM: ");
   Serial.println(topic);
+
+  char *value = strtok(p, ";");
+  Serial.print("VALUE: ");
+  Serial.print(value);
+
+  char *token = strtok(NULL, ";");
+  Serial.print(" - TOKEN: ");
+  Serial.println(token);
 }
