@@ -4,7 +4,7 @@ const int LED_PIN = A0;
 void pushButton(int delayAmmount){
 	digitalWrite(BUTTON_PIN, HIGH);
   Serial.println(">>> Button is 1? -" + String(digitalRead(BUTTON_PIN)));
-  delay(delayAmmount);
+  delay(delayAmmount * 1000);
   digitalWrite(BUTTON_PIN, LOW);
   Serial.println("<<< Button is 0? -" + String(digitalRead(BUTTON_PIN)));
 }

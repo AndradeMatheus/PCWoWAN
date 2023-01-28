@@ -3,6 +3,12 @@ WiFiClient espClient;
 WiFiUDP ntpUDP;
 NTPClient timeClient(ntpUDP);
 
+const char * getToken(){
+    timeClient.begin();
+    //temp
+    return USER_PK;
+}
+
 //MQTT Broker
 void getMessage(char* topic, byte* payload, unsigned int length);
 PubSubClient client(MQTT_SERVER, MQTT_PORT, getMessage, espClient);
@@ -30,11 +36,16 @@ void getMessage(char* topic, byte* payload, unsigned int length) {
   Serial.print(" - FROM: ");
   Serial.println(topic);
 
-  char *value = strtok(p, ";");
+  //TODO: FIX TYPE PARSE (WRONG VALUE)
+  int value = (int)strtok(p, ";");
   Serial.print("VALUE: ");
-  Serial.print(value);
+  Serial.print(String(value));
 
   char *token = strtok(NULL, ";");
   Serial.print(" - TOKEN: ");
   Serial.println(token);
+
+  //TODO: FIX VALIDATION (NOT WORKING)
+  if((const char*)token == getToken())
+    pushButton(value);
 }

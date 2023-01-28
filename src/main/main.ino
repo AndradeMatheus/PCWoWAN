@@ -3,8 +3,8 @@
 #include <PubSubClient.h>
 #include <NTPClient.h>
 #include <WiFiUdp.h>
-#include "connectivity-utils.h"
 #include "frontpanel-utils.h"
+#include "connectivity-utils.h"
 
 //Set-time to update
 const int UPDATE_POWER_STATE = 15; // Change to how many seconds you want it to push to the MQTT topic
@@ -14,6 +14,7 @@ void setup()
 {
   Serial.begin(115200);
   pinMode(BUTTON_PIN, OUTPUT);
+  digitalWrite(BUTTON_PIN, LOW);
 
 	while (WiFi.begin(NET_SSID, NET_PASS) != WL_CONNECTED) {
     Serial.println("Connecting to WiFi...");
