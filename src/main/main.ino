@@ -53,8 +53,7 @@ void loop()
 
 	if(CYCLE == UPDATE_POWER_STATE){
 		CYCLE = 0;
-    char *str;
-		bool mqttClientResponse = updateTopic(MQTT_TOPIC_STATUS, (char*)(powerState));
+		bool mqttClientResponse = updateTopic(MQTT_TOPIC_STATUS, String(powerState).c_str());
 		Serial.println(mqttClientResponse ? "Topic published." : "Error on publish.");
 	}
 	else CYCLE++;
@@ -74,9 +73,11 @@ bool getPowerState(){
   return power;
 }
 
-bool updateTopic(const char *topic, char *content){
+bool updateTopic(const char *topic, const char *content){
 	Serial.print("Sending message to MQTT topic: ");
-  Serial.print(topic);
+  Serial.println(topic);
+  Serial.print("With content: ");
+  Serial.println(content);
 
 	return client.publish(topic, content);
 }
