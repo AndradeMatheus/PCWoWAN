@@ -11,7 +11,7 @@ void pushButton(int delayAmmount){
 
 bool getPowerState(){
  	float power = analogRead(LED_PIN);
-  Serial.println("POWER VALUE: " + String(power));
+  Serial.println("POWER ADC VALUE: " + String(power));
 	Serial.println("!!! Power is " + String(power > 100 ? "ON" : "OFF"));
   return power > 100 ? true : false;
 }
