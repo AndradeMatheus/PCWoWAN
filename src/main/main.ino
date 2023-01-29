@@ -6,9 +6,7 @@
 #include "frontpanel-utils.h"
 #include "connectivity-utils.h"
 
-//Set-time to update
-const int UPDATE_POWER_STATE = 15; // Change to how many seconds you want it to push to the MQTT topic
-int CYCLE = 0;
+bool POWER_STATE_PREVIOUS = false;
 
 void setup()
 {
@@ -44,11 +42,9 @@ void loop()
 	client.loop();
 
 	bool powerState = getPowerState();
-
-	if(CYCLE == UPDATE_POWER_STATE){
-		CYCLE = 0;
-		bool mqttClientResponse = pushTopic(MQTT_TOPIC_STATUS, String(powerState).c_str());
+  if(powerState != POWER_STATE_PREVIOUS){
+    POWER_STATE_PREVIOUS = powerState;
+    bool mqttClientResponse = pushTopic(MQTT_TOPIC_STATUS, String(powerState).c_str());
 		Serial.println(mqttClientResponse ? "Topic published." : "Error on publish.");
-	}
-	else CYCLE++;
+  }
 }
