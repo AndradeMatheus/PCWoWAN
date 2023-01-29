@@ -1,12 +1,12 @@
-const int BUTTON_PIN = 0;
+const int BUTTON_PIN = D1;
 const int LED_PIN = A0;
 
 void pushButton(int delayAmmount){
 	digitalWrite(BUTTON_PIN, HIGH);
-  Serial.println(">>> Button is 1? -" + String(digitalRead(BUTTON_PIN)));
+  Serial.println((String)">>> Button is 1? - " + digitalRead(BUTTON_PIN) + " Delay: " + delayAmmount);
   delay(delayAmmount * 1000);
   digitalWrite(BUTTON_PIN, LOW);
-  Serial.println("<<< Button is 0? -" + String(digitalRead(BUTTON_PIN)));
+  Serial.println((String)"<<< Button is 0? - " + digitalRead(BUTTON_PIN));
 }
 
 bool getPowerState(){
