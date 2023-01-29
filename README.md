@@ -20,19 +20,19 @@ Currently the form of connection from the ESP8266 to the app, and vice-versa, ov
   - NodeMCU (used on this guide) **OR**;
   - Wemos D1 mini **OR**;
   - Any other version of arduino, be it a standalone MC or a full board w/ a ESP8266 module.
-* Code on this repo (available later)
+* Code on this repo
 * 1x USB A micro male to Motherboard "DuPont" female USB header (use prefferable length)
 * 3x Arduino "DuPont" male-female cables (use prefferable length)
 * 1x Transistor NPN BJT 2N3904
 * 1x 1k ohm resistor
-* Subscription over a MQTT broker (such as https://console.hivemq.cloud/)
+* Subscription over a MQTT broker (such as https://console.hivemq.cloud/ or https://test.mosquitto.org/)
 * My app (available later)
 
 ## Simple electric diagram
-![image](https://user-images.githubusercontent.com/43782936/215001577-255c7d9d-ec74-45c5-bf5e-ae610282d3f6.png)
+![electrical](https://user-images.githubusercontent.com/43782936/215306770-68f22943-b282-425f-b307-58f1ca4b225f.png)
 
 ## Assembly projection
-![image](https://user-images.githubusercontent.com/43782936/215001669-5ea5b947-7eeb-4f3a-bed5-342e83029a38.png)
+![physical_wiring_diagram](https://user-images.githubusercontent.com/43782936/215306830-afaeb133-cea3-4384-8475-0c226ba700f1.png)
 
 This was reffering to a NodeMCU. The output and input digital ports can be customized on the code from the top variables.
 
