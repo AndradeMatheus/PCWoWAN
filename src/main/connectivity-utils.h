@@ -3,9 +3,10 @@ WiFiClient espClient;
 WiFiUDP ntpUDP;
 NTPClient timeClient(ntpUDP);
 
+//TODO: Implement token generation from USER_PK
 const char * getToken(){
     timeClient.begin();
-    //temp
+    //temporarily using PK as token
     return USER_PK;
 }
 
@@ -29,13 +30,9 @@ void getMessage(char* topic, byte* payload, unsigned int length) {
   char *p = reinterpret_cast<char*>(payload);
   Serial.println((String)"PAYLOAD: " + p + " - FROM: " + topic);
 
-  const char *value = strtok(p, ";");
-  const char *tokenReceived = strtok(NULL, ";");
+  const char *payloadDelay = strtok(p, ";");
+  const char *payloadToken = strtok(NULL, ";");
 
-  Serial.println((String)"VALUE: " + value + " - TOKEN: " + tokenReceived);
-
-  const char *token = getToken();
-
-  if(token == getToken())
-    pushButton(String(value).toInt());
+  if(String(payloadToken) == String(getToken()))
+    pushButton(String(payloadDelay).toInt());
 }
