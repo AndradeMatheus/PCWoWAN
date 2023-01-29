@@ -29,8 +29,7 @@ void setup()
       Serial.println("Connected to MQTT.");
     }
   	else {
-      Serial.print("Connection to MQTT failed: ");
-      Serial.println(client.state());
+      Serial.println((String)"Connection to MQTT failed: " + client.state());
       delay(2000);
     }
   }
