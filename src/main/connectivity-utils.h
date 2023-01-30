@@ -23,7 +23,7 @@ bool pushTopic(const char *topic, const char *content){
 bool getTopic(const char *topic){
 	Serial.println((String)"Subscribing to MQTT topic: " + topic);
 
-	return (int)client.subscribe(topic);
+	return client.subscribe(topic);
 }
 
 void getMessage(char* topic, byte* payload, unsigned int length) {
