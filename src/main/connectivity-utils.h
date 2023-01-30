@@ -1,11 +1,8 @@
 //Wi-Fi
 WiFiClient espClient;
-WiFiUDP ntpUDP;
-NTPClient timeClient(ntpUDP);
 
 //TODO: Implement token generation from USER_PK
 const char * getToken(){
-	timeClient.begin();
 	//temporarily using PK as token
 	return USER_PK;
 }

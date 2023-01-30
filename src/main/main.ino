@@ -1,8 +1,6 @@
 #include "credentials.h"
 #include <ESP8266WiFi.h>
 #include <PubSubClient.h>
-#include <NTPClient.h>
-#include <WiFiUdp.h>
 #include "frontpanel-utils.h"
 #include "connectivity-utils.h"
 
