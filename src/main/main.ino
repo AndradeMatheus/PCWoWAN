@@ -8,6 +8,7 @@
 
 const int BAUD_RATE = 115200;
 bool POWER_STATE_PREVIOUS = false;
+bool DELETE_TOPICS = false;
 
 void setup()
 {
@@ -32,15 +33,13 @@ void setup()
 		}
 	}
 
-	while(!getTopic(MQTT_TOPIC_BUTTON))
-		delay(1000);
+	while(!getTopic(MQTT_TOPIC_BUTTON)) delay(1000);
 
 	POWER_STATE_PREVIOUS = getPowerState();
-	while(!pushTopic(MQTT_TOPIC_STATUS, String(POWER_STATE_PREVIOUS).c_str()))
-		delay(1000);
+	while(!pushTopic(MQTT_TOPIC_STATUS, String(POWER_STATE_PREVIOUS).c_str())) delay(1000);
 
-	while(!deleteTopic(MQTT_TOPIC_STATUS))
-		delay(1000);
+	if(DELETE_TOPICS)
+		while(!deleteTopic(MQTT_TOPIC_STATUS)) delay(1000);
 }
 
 void loop()
@@ -51,14 +50,12 @@ void loop()
 	bool powerState = getPowerState();
 	if(powerState != POWER_STATE_PREVIOUS){
 		POWER_STATE_PREVIOUS = powerState;
-		while(!pushTopic(MQTT_TOPIC_STATUS, String(powerState).c_str()))
-			delay(1000);
+		while(!pushTopic(MQTT_TOPIC_STATUS, String(powerState).c_str())) delay(1000);
 
-		while(!deleteTopic(MQTT_TOPIC_STATUS))
-			delay(1000);
-
-		while(!deleteTopic(MQTT_TOPIC_BUTTON))
-			delay(1000);
+		if(DELETE_TOPICS){
+			while(!deleteTopic(MQTT_TOPIC_STATUS)) delay(1000);
+			while(!deleteTopic(MQTT_TOPIC_BUTTON)) delay(1000);
+		}
 
 		Serial.println("Topic published.");
 	}
