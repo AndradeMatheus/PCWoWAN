@@ -34,6 +34,10 @@ void setup()
 
 	while(!getTopic(MQTT_TOPIC_BUTTON))
 		delay(1000);
+
+	POWER_STATE_PREVIOUS = getPowerState();
+	while(!pushTopic(MQTT_TOPIC_STATUS, String(POWER_STATE_PREVIOUS).c_str()))
+		delay(1000);
 }
 
 void loop()
@@ -44,7 +48,9 @@ void loop()
 	bool powerState = getPowerState();
 	if(powerState != POWER_STATE_PREVIOUS){
 		POWER_STATE_PREVIOUS = powerState;
-		bool mqttClientResponse = pushTopic(MQTT_TOPIC_STATUS, String(powerState).c_str());
-		Serial.println(mqttClientResponse ? "Topic published." : "Error on publish.");
+		while(!pushTopic(MQTT_TOPIC_STATUS, String(powerState).c_str()))
+			delay(1000);
+
+		Serial.println("Topic published.");
 	}
 }
