@@ -38,6 +38,9 @@ void setup()
 	POWER_STATE_PREVIOUS = getPowerState();
 	while(!pushTopic(MQTT_TOPIC_STATUS, String(POWER_STATE_PREVIOUS).c_str()))
 		delay(1000);
+
+	while(!deleteTopic(MQTT_TOPIC_STATUS))
+		delay(1000);
 }
 
 void loop()
@@ -49,6 +52,12 @@ void loop()
 	if(powerState != POWER_STATE_PREVIOUS){
 		POWER_STATE_PREVIOUS = powerState;
 		while(!pushTopic(MQTT_TOPIC_STATUS, String(powerState).c_str()))
+			delay(1000);
+
+		while(!deleteTopic(MQTT_TOPIC_STATUS))
+			delay(1000);
+
+		while(!deleteTopic(MQTT_TOPIC_BUTTON))
 			delay(1000);
 
 		Serial.println("Topic published.");
